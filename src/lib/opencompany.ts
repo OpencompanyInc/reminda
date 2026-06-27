@@ -2,8 +2,8 @@ import {
   secrets,
   createBilling,
   LocalMockResolver,
-  type ResolveContext,
 } from "@opencompany/sdk";
+import { resolveContext } from "./auth";
 
 const resolver = new LocalMockResolver({
   STRIPE_KEY: {
@@ -17,10 +17,14 @@ const resolver = new LocalMockResolver({
   },
 });
 
-const ctx: ResolveContext = {
-  tier: process.env.NODE_ENV === "production" ? "prod" : "dev",
-  identity: "dev:local",
-};
+/**
+ * Get a billing instance scoped to the current auth session.
+ * Call this inside server components or route handlers — it resolves
+ * the user identity from the platform session cookie.
+ */
+export async function getBilling() {
+  const ctx = await resolveContext();
+  return createBilling(resolver, ctx);
+}
 
-export const billing = createBilling(resolver, ctx);
 export { secrets };

@@ -1,5 +1,5 @@
 {
   "slug": "reminda",
   "repo": "OpencompanyInc/reminda",
-  "brokerUrl": "https://localhost:3000"
+  "brokerUrl": "https://localhost:3003"
 }
