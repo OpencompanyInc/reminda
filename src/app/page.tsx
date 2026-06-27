@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getSession, requireAuth } from "@/lib/auth";
+import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 
 export default async function Home() {
